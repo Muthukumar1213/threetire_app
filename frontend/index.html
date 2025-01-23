@@ -9,7 +9,7 @@
     <h1>Welcome to the Devops decoder's Three-Tier Application</h1>
     <p>Data from Backend: <span id="data"></span></p>
     <script>
-        fetch('http://shopping_application-backend:5000/data')
+        fetch('http://192.168.56.104/:5000/data')
             .then(response => response.json())
             .then(data => {
                 document.getElementById('data').textContent = data.message;
