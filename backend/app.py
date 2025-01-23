@@ -8,7 +8,7 @@ def get_data():
     try:
         # Connect to the database
         conn = mysql.connector.connect(
-            host='database',  # Database service name in the Docker network
+            host='shopping_application-database',  # Database service name in the Docker network
             user='root',
             password='password',
             database='appdb'
