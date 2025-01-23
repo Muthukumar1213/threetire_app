@@ -1,9 +1,14 @@
+from flask import Flask, jsonify
+import mysql.connector
+
+app = Flask(__name__)
+
 @app.route('/data')
 def get_data():
     try:
         # Connect to the database
         conn = mysql.connector.connect(
-            host='database',  # Database service name in Docker Compose
+            host='database',  # Database service name in the Docker network
             user='root',
             password='password',
             database='appdb'
@@ -11,16 +16,9 @@ def get_data():
         cursor = conn.cursor()
         cursor.execute('SELECT message FROM messages LIMIT 1')
         result = cursor.fetchone()
-        
-        # Check if result exists
-        if result:
-            return jsonify({'message': result[0]})
-        else:
-            return jsonify({'error': 'No data found'}), 404
-    except mysql.connector.Error as err:
-        return jsonify({'error': f'MySQL error: {str(err)}'}), 500
+        return jsonify({'message': result[0]})
     except Exception as e:
-        return jsonify({'error': f'An error occurred: {str(e)}'}), 500
-    finally:
-        if conn.is_connected():
-            conn.close()
+        return jsonify({'error': str(e)}), 500
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
