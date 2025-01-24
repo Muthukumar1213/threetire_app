@@ -7,15 +7,21 @@
 </head>
 <body>
     <h1>Welcome to the Shopping Application</h1>
-    <p>Data from Backend: <span id="data"></span></p>
+    <ul id="shopping-list"></ul>
     <script>
-        fetch('http://localhost:5000/data')
+        fetch('http://localhost:5000/items')
             .then(response => response.json())
             .then(data => {
-                document.getElementById('data').textContent = data.message;
+                const list = document.getElementById('shopping-list');
+                data.items.forEach(item => {
+                    const li = document.createElement('li');
+                    li.textContent = `${item.name} - ${item.price}`;
+                    list.appendChild(li);
+                });
             })
-            .catch(() => {
-                document.getElementById('data').textContent = "Error fetching data";
+            .catch(err => {
+                const list = document.getElementById('shopping-list');
+                list.textContent = "Error fetching data: " + err.message;
             });
     </script>
 </body>
