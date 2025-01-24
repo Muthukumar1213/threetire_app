@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Three-Tier Application</title>
+    <title>Shopping Application</title>
 </head>
 <body>
-    <h1>Welcome to the Devops decoder's Three-Tier Application</h1>
+    <h1>Welcome to the Shopping Application</h1>
     <p>Data from Backend: <span id="data"></span></p>
     <script>
-        fetch('http://192.168.56.104/:5000/data')
+        fetch('http://localhost:5000/data')
             .then(response => response.json())
             .then(data => {
                 document.getElementById('data').textContent = data.message;
             })
-            .catch(err => {
+            .catch(() => {
                 document.getElementById('data').textContent = "Error fetching data";
             });
     </script>
