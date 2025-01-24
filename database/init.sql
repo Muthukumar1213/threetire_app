@@ -1,10 +1,11 @@
-CREATE DATABASE appdb;
-USE appdb;
-
-CREATE TABLE messages (
+CREATE TABLE items (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    message VARCHAR(255) NOT NULL
+    name VARCHAR(255) NOT NULL,
+    price VARCHAR(50) NOT NULL
 );
 
-INSERT INTO messages (message) VALUES ('Hello from the database!');
+INSERT INTO items (name, price) VALUES
+('Laptop', '$1000'),
+('Headphones', '$200'),
+('Smartphone', '$800');
 
