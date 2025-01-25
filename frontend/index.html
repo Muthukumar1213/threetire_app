@@ -1,28 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping Application</title>
+    <title>Shopping App</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Welcome to the Shopping Application</h1>
-    <ul id="shopping-list"></ul>
-    <script>
-        fetch('http://localhost:5000/items')
-            .then(response => response.json())
-            .then(data => {
-                const list = document.getElementById('shopping-list');
-                data.items.forEach(item => {
-                    const li = document.createElement('li');
-                    li.textContent = `${item.name} - ${item.price}`;
-                    list.appendChild(li);
-                });
-            })
-            .catch(err => {
-                const list = document.getElementById('shopping-list');
-                list.textContent = "Error fetching data: " + err.message;
-            });
-    </script>
+    <h1>Shopping Application</h1>
+    <div id="items"></div>
+    <script src="script.js"></script>
 </body>
 </html>
