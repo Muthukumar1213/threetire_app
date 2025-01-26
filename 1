@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  shopping_database:
+    build: ./database
+    container_name: shopping_database
+    environment:
+      MYSQL_DATABASE: shopping_db
+      MYSQL_ROOT_PASSWORD: rootpassword
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - shopping-network
+
+  backend:
+    build: ./backend
+    container_name: shopping_backend
+    depends_on:
+      - shopping_database
+    environment:
+      DB_HOST: shopping_database
+      DB_PORT: 3306
+      DB_NAME: shopping_db
+      DB_USER: root
+      DB_PASSWORD: rootpassword
+    ports:
+      - "5000:5000"
+    networks:
+      - shopping-network
+
+  frontend:
+    build: ./frontend
+    container_name: shopping_frontend
+    depends_on:
+      - backend
+    ports:
+      - "8080:80"
+    networks:
+      - shopping-network
+volumes:
+  mysql_data:
+    driver: local
+networks:
+  shopping-network:
+    driver:  bridge

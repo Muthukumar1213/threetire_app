@@ -1,28 +1,36 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
+from flask_cors import CORS
 import mysql.connector
 import os
 
 app = Flask(__name__)
 
-@app.route('/items', methods=['GET'])
-def get_items():
+# Enable CORS
+CORS(app, resources={r"/products": {"origins": "http://172.18.0.4:80"}})
+
+# MySQL connection function
+def get_db_connection():
+    return mysql.connector.connect(
+        host=os.getenv('DB_HOST', 'database'),  # Use environment variables with defaults
+        user=os.getenv('DB_USER', 'root'),
+        password=os.getenv('DB_PASSWORD', 'rootpassword'),
+        database=os.getenv('DB_NAME', 'shopping_db')
+    )
+
+# Fetch all products
+@app.route('/products', methods=['GET'])
+def get_products():
     try:
-        db_conn = mysql.connector.connect(
-            host=os.getenv("DB_HOST"),
-            user=os.getenv("DB_USER"),
-            password=os.getenv("DB_PASSWORD"),
-            database=os.getenv("DB_NAME")
-        )
-        cursor = db_conn.cursor(dictionary=True)
-        cursor.execute("SELECT name, price FROM items;")
-        items = cursor.fetchall()
-        return jsonify({"items": items})
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-    finally:
-        if 'db_conn' in locals() and db_conn.is_connected():
-            cursor.close()
-            db_conn.close()
+        connection = get_db_connection()  # Use the correct connection function
+        cursor = connection.cursor(dictionary=True)
+        cursor.execute("SELECT * FROM products")  # Fetch all products from the `products` table
+        products = cursor.fetchall()
+        cursor.close()
+        connection.close()
+        return jsonify({"products": products}), 200  # Return products with a 200 HTTP status
+    except mysql.connector.Error as err:
+        return jsonify({"error": f"Database error: {str(err)}"}), 500  # Handle database errors gracefully
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5000)
+

@@ -1,12 +1,81 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Shopping App</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        .product {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .product h2 {
+            margin: 0 0 10px;
+        }
+        .product p {
+            margin: 5px 0;
+        }
+    </style>
 </head>
 <body>
-    <h1>Shopping Application</h1>
-    <div id="items"></div>
-    <script src="script.js"></script>
+    <h1>Product List</h1>
+    <div id="products"></div>
+
+    <script>
+        // Mock JSON data from backend
+        const mockResponse = {
+            "products": [
+                {
+                    "description": "A high-performance laptop.",
+                    "id": 1,
+                    "name": "Laptop",
+                    "price": "999.99"
+                },
+                {
+                    "description": "A sleek and powerful smartphone.",
+                    "id": 2,
+                    "name": "Smartphone",
+                    "price": "699.99"
+                },
+                {
+                    "description": "Noise-cancelling over-ear headphones.",
+                    "id": 3,
+                    "name": "Headphones",
+                    "price": "199.99"
+                }
+            ]
+        };
+
+        // Function to render products on the page
+        function displayProducts(products) {
+            const productsContainer = document.getElementById('products');
+            products.forEach(product => {
+                const productDiv = document.createElement('div');
+                productDiv.className = 'product';
+                productDiv.innerHTML = `
+                    <h2>${product.name}</h2>
+                    <p>${product.description}</p>
+                    <p><strong>Price:</strong> $${product.price}</p>
+                `;
+                productsContainer.appendChild(productDiv);
+            });
+        }
+
+        // Simulate fetching data from an API
+        document.addEventListener('DOMContentLoaded', () => {
+            // Assume this data comes from a backend API
+            displayProducts(mockResponse.products);
+        });
+    </script>
 </body>
 </html>
+
