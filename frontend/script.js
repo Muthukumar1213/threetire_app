@@ -1,5 +1,5 @@
 // Fetch products from the backend and display them
-fetch('http://localhost:5000/products')  // Adjust the URL if needed
+fetch('http://backend:5000/products')  // Adjust the URL if needed
     .then(response => response.json())
     .then(data => {
         const productsList = document.getElementById('productsList');
