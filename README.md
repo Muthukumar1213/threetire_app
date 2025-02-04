@@ -4,13 +4,14 @@
 you need a setup that includes 
 
 1. **Frontend (Web Layer):** Handles the user interface.
-2.  **Backend (API):** manages the request  from frontend and backend.
+2.  **Backend (API):** Manages the request  from frontend and backend.
 3.  **Database** : store the data
    
 
 Below is a step-by-step guide:
 
-![image](https://github.com/user-attachments/assets/23352d06-2ba2-4a12-85fe-59a8c33c5310)
+![image](https://github.com/user-attachments/assets/8ac2e8af-ba1f-4380-858e-5184feb3beec)
+
 
 
 **Prerequisites**
