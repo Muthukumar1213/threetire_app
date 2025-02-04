@@ -32,7 +32,7 @@ Step 2: Create **Application Files**
 
         Database (init.sql)
         
-Step 3: Create the Docker images  
+Step 3: Create the Docker images and network 
 
 **Navigate to the shopping-app directory:**
 
@@ -40,6 +40,8 @@ Step 3: Create the Docker images
     docker build -t backend:3t-app .
     docker build -t database:3t-app .
 
+To create the network 
+docker network create 3t-app
    
 Step 4: Deploy the Application
 
