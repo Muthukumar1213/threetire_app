@@ -6,7 +6,7 @@ import os
 app = Flask(__name__)
 
 # Enable CORS
-CORS(app, resources={r"/products": {"origins": "http://shopping_application-frontend-1:8080"}})
+CORS(app, resources={r"/items": {"origins": "http://frontend:8000"}})
 
 # MySQL connection function
 def get_db_connection():
@@ -18,7 +18,7 @@ def get_db_connection():
     )
 
 # Fetch all products
-@app.route('/products', methods=['GET'])
+@app.route('/items', methods=['GET'])
 def get_products():
     try:
         connection = get_db_connection()  # Use the correct connection function
