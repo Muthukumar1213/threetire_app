@@ -1,4 +1,4 @@
-CCREATE DATABASE IF NOT EXISTS shopping_db;
+CREATE DATABASE IF NOT EXISTS shopping_db;
 USE shopping_db;
 
 CREATE TABLE IF NOT EXISTS items (
