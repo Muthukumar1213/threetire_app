@@ -10,7 +10,8 @@ you need a setup that includes
 
 Below is a step-by-step guide:
 
-![image](https://github.com/user-attachments/assets/8ac2e8af-ba1f-4380-858e-5184feb3beec)
+![image](https://github.com/user-attachments/assets/ff3a189d-dcc8-4198-a17e-9bc7a5e7d121)
+
 
 
 
@@ -24,26 +25,33 @@ Step 1: Write **Frontend Dockerfile**  &  **Backend Dockerfile**
 
 Step 2: Create **Application Files**
         Frontend (index.html)
-        
-        Frontend (app.js)
-        
+                
         Backend (app.py)
         
         Backend (requirements.txt)
-        
-Step 3: Write **docker-compose.yml**
 
+        Database (init.sql)
+        
+Step 3: Create the Docker images  
+
+**Navigate to the shopping-app directory:**
+
+   docker build -t frontend:3t-app .
+   docker build -t backend:3t-app .
+   docker build -t database:3t-app .
+
+   
 Step 4: Deploy the Application
 
-        cd shopping-app
+        docker run -d --name frontend --network app-network -p 80:80 frontend:3t-app
+        docker run -d --name database-container --network 3t-app  -e MYSQL_DATABASE=shopping_db -e MYSQL_ROOT_PASSWORD=rootpassword -p 3306:3306 database:3t-app
+        docker run -d --name backend-container --network 3t-app  -e DB_HOST=database-container -e DB_USER=root -e DB_PASSWORD=rootpassword -e DB_NAME=shopping_db -p 5000:5000  backend:3t-app
         
-Navigate to the shopping-app directory:
 
-       docker compose up -d
 
 Step 5: Access the Application
 
 Open your browser and navigate to **http://localhost:8080** to view the shopping app frontend.
-The frontend fetches product data from the backend via **http://backend:5000**
+The frontend fetches product data from the backend via **http://backend:5000/items**
 
 
