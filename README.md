@@ -37,10 +37,8 @@ Step 3: Create the Docker images
 **Navigate to the shopping-app directory:**
 
     docker build -t frontend:3t-app .
-
-   docker build -t backend:3t-app .
-
-   docker build -t database:3t-app .
+    docker build -t backend:3t-app .
+    docker build -t database:3t-app .
 
    
 Step 4: Deploy the Application
