@@ -1,13 +1,19 @@
-CREATE DATABASE IF NOT EXISTS shopping_db;
+-- Create the database
+CREATE DATABASE shopping_db;
+
+-- Switch to the database
 USE shopping_db;
 
-CREATE TABLE IF NOT EXISTS items (
+-- Create the products table
+CREATE TABLE products (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    price VARCHAR(50) NOT NULL
+    description TEXT NOT NULL,
+    price DECIMAL(10,2) NOT NULL
 );
 
-INSERT INTO items (name, price) VALUES 
-('Laptop', '$1000'),
-('Headphones', '$200'),
-('Smartphone', '$800');
+-- Insert sample data
+INSERT INTO products (name, description, price) VALUES 
+('Laptop', 'A high-performance laptop.', 999.99),
+('Smartphone', 'A sleek and powerful smartphone.', 699.99),
+('Headphones', 'Noise-cancelling over-ear headphones.', 199.99);
