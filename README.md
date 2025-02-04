@@ -1,10 +1,12 @@
 
-**To Deploy a two-tier shopping application using Docker**
+**To Deploy a three-tier shopping application using Docker**
 
 you need a setup that includes 
 
 1. **Frontend (Web Layer):** Handles the user interface.
-2.  **Backend (Database Layer):** Stores and manages the application data.
+2.  **Backend (API):** manages the request  from frontend and backend.
+3.  **Database** : store the data
+   
 
 Below is a step-by-step guide:
 
