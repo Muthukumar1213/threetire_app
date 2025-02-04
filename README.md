@@ -40,9 +40,9 @@ Step 3: Create the Docker images and network
     docker build -t backend:3t-app .
     docker build -t database:3t-app .
 
-To create the network
+   **To create the networks**
 
-   docker network create 3t-app
+    docker network create 3t-app
    
 Step 4: Deploy the Application
 
