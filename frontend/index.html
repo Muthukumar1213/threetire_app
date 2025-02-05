@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product List</title>
     <style>
-        /* Add some basic styles for presentation */
+        /* Basic styling */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -51,33 +51,25 @@
     </div>
 
     <script>
-        // Mock JSON data from backend
-        const mockResponse = {
-            "products": [
-                {
-                    "description": "A high-performance laptop.",
-                    "id": 1,
-                    "name": "Laptop",
-                    "price": "999.99"
-                },
-                {
-                    "description": "A sleek and powerful smartphone.",
-                    "id": 2,
-                    "name": "Smartphone",
-                    "price": "699.99"
-                },
-                {
-                    "description": "Noise-cancelling over-ear headphones.",
-                    "id": 3,
-                    "name": "Headphones",
-                    "price": "199.99"
+        // Function to fetch data from backend
+        async function fetchProducts() {
+            try {
+                const response = await fetch('http://backend:5000/products'); // Replace with actual backend URL
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-            ]
-        };
+                const data = await response.json();
+                displayProducts(data.products);
+            } catch (error) {
+                console.error('Error fetching products:', error);
+                document.getElementById('products').innerHTML = '<p style="color:red;">Error loading products.</p>';
+            }
+        }
 
-        // Function to render products on the page
+        // Function to display products on the page
         function displayProducts(products) {
             const productsContainer = document.getElementById('products');
+            productsContainer.innerHTML = ''; // Clear previous content
             products.forEach(product => {
                 const productDiv = document.createElement('div');
                 productDiv.className = 'product';
@@ -95,10 +87,8 @@
             });
         }
 
-        // Simulate fetching data from an API
-        document.addEventListener('DOMContentLoaded', () => {
-            displayProducts(mockResponse.products);
-        });
+        // Fetch products when the page loads
+        document.addEventListener('DOMContentLoaded', fetchProducts);
     </script>
 
 </body>
