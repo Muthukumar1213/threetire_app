@@ -4,7 +4,7 @@
 you need a setup that includes 
 
 1. **Frontend (Web Layer):** Handles the user interface.
-2.  **Backend (API):** Manages the request  from frontend and backend.
+2.  **Backend (API):** Manages the request  from frontend and database.
 3.  **Database** : store the data
    
 
