@@ -24,6 +24,7 @@ Below is a step-by-step guide:
 Step 1: Write **Frontend Dockerfile**  &  **Backend Dockerfile**
 
 Step 2: Create **Application Files**
+
         Frontend (index.html)
                 
         Backend (app.py)
